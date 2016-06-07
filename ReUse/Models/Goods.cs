@@ -1,6 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-
 namespace ReUse.Models
 {
     public class Goods
@@ -31,13 +34,14 @@ namespace ReUse.Models
         [DisplayName("交易地点")]
         public string Address { get; set; }
         [DisplayName("浏览次数")]
-        public string ClickNum { get; set; }
+        public int ClickNum { get; set; }
         [DisplayName("发布时间")]
-        public string CreatDate { get; set; }
+        public DateTime CreatDate { get; set; }
         [DisplayName("状态")]
-        public string State { get; set; }//0正常 1交易成功 2撤销
-        public int UserID { get; set; }
+        public int State { get; set; }//0正常 1交易成功 2撤销
+        public int? UserID { get; set; }
         public virtual User User { get; set; }
-
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Tran> Trans { get; set; }
     }
 }

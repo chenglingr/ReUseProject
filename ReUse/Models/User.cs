@@ -11,6 +11,7 @@ namespace ReUse.Models
         [Key]
         public int ID { get; set; }
         [DisplayName("用户名")]
+        
         [Required(ErrorMessage = "请输入用户名")]
         public string UserName { get; set; }
         [DisplayName("密码")]
@@ -32,5 +33,6 @@ namespace ReUse.Models
         [DisplayName("状态")]
         public int State { get; set; }//1正常 2禁用  3消失
         public virtual ICollection<Goods> Goodss { get; set; }
+        public virtual ICollection<Want> Wants { get; set; }
     }
 }
