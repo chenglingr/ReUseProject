@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section TitleSection{
+    Add
+}
+@section HeaderSection{
+    <link href="~/Ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="~/Ueditor/lang/zh-cn/zh-cn.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    
+}
+@section ContentBody{
+    <div class="body-content">
+     
+        @using (Html.BeginForm("Add","Article", FormMethod.Post, new {id = "myform" }))
+        {
+            @Html.Label("文章标题:")
+            @Html.TextBox("topic", "", new { @class = "form-control myinput" }) <br />
+            @Html.Label("文章内容:")<br />
+            @Html.TextArea("content")
+
+            <br />
+            <button type="submit" class="btn btn-default" id="save">发表</button>
+            <script type="text/javascript">
+            //实例化编辑器
+                var um = UM.getEditor('content', { initialFrameWidth: null });//重写前面的textarea标签
+                um.setWidth("100%");//设置宽度
+                $('#myform').submit(function () {
+                    $('#content').val(um.getContent());//点击提交按钮时 获取插件里得值
+                });
+            </script>
+        }
+    </div>
+}
+

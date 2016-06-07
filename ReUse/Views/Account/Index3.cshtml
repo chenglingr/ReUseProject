@@ -1,0 +1,47 @@
+﻿@model ReUse.ViewModels.AccountListViewModel
+@{
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section TitleSection{
+       Index
+      }
+@section HeaderSection{
+    @*注释：这里放引入js css的代码  没有可省略本部分*@
+    }
+@section ContentBody{  
+    <div> 
+        @using (Html.BeginForm())
+        {
+            <p>
+                按邮箱搜索：  @Html.TextBox("Search")
+                <input type="submit" value="搜索" />
+            </p>
+
+        }
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>邮箱</th>
+                    <th>地址</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ReUse.Models.Account item in Model.Accounts)
+                {
+                   <tr>
+                       <td>@item.Email</td>
+                       <td>@item.Address</td>
+                       <td>
+                           @Html.ActionLink("详情", "Detail", new { id = item.ID })
+                           @Html.ActionLink("编辑", "Edit", new { id = item.ID })
+                           @Html.ActionLink("删除", "Delete", new { id = item.ID })
+                       </td>
+                   </tr>
+                    }
+            </tbody>
+           
+        </table>
+       
+    </div>
+}

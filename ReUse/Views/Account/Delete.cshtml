@@ -1,0 +1,33 @@
+﻿@model ReUse.Models.Account
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section TitleSection{
+    Delete
+}
+@section HeaderSection{
+    <link href="~/Content/Site.css" rel="stylesheet" />
+}
+@section ContentBody{
+    <div class="body-content">
+        <h2>确定删除以下用户？</h2>
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Email):</dt>
+            <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Address):</dt>
+            <dd>@Html.DisplayFor(model => model.Address)</dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            <div>
+                <input type="submit" value="删除" />
+                @Html.ActionLink("返回首页", "Index")
+            </div>
+        }
+   </div>
+}
+
+
+
+

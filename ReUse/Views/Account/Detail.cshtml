@@ -1,0 +1,37 @@
+﻿@model ReUse.Models.Account 
+
+@{
+
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section TitleSection{
+   Detail
+}
+@section HeaderSection{
+    @*注释：这里放引入js css的代码  没有可省略本部分*@
+    <link href="~/Content/Site.css" rel="stylesheet" />
+}
+@section ContentBody{ 
+    <div class="body-content">
+        <dl>
+       @{     
+           if (@Model != null)
+           {
+            <dt>@Html.DisplayNameFor(model => model.ID):</dt>
+            <dd>@Html.DisplayFor(model => model.ID)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Email):</dt>
+            <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Address):</dt>
+            <dd>@Html.DisplayFor(model => model.Address)</dd>
+           }
+           else
+           {
+            <dt>此用户不存在</dt>
+           }
+    }
+        </dl>
+    </div>
+    }
+

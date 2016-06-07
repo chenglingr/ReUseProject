@@ -1,0 +1,65 @@
+﻿@model ReUse.Models.Article
+@{
+     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section HeaderSection{
+    <link href="~/Ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="~/Ueditor/lang/zh-cn/zh-cn.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+}
+@section ContentBody{
+<h2>Edit</h2>
+<hr />
+ @{  
+     if (@Model != null)
+     {
+        using (Html.BeginForm("Edit", "Article", FormMethod.Post, new { id = "myform" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="body-content">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.AccountID)
+                @Html.HiddenFor(model => model.clickCount)
+                @Html.HiddenFor(model => model.createTime)
+                @Html.HiddenFor(model => model.lastClickTime)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.topic, htmlAttributes: new { @class = "control-label" })<br />
+                    @Html.EditorFor(model => model.topic, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.topic, "", new { @class = "text-danger" })<br />
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.content, htmlAttributes: new { @class = "control-label " })<br />
+                      @Html.TextArea("content")
+                        @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })<br />
+                 </div>
+                <div class="form-group">
+                     <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+                <script type="text/javascript">
+                    //实例化编辑器
+                        var um = UM.getEditor('content', { initialFrameWidth: null });//重写前面的textarea标签
+                        um.setWidth("100%");//设置宽度
+                        um.ready(function () {
+                            var con = '@Html.Raw(Model.content)';
+                            um.setContent(con);
+                        });
+                        $('#myform').submit(function () {
+                            $('#content').val(um.getContent());//点击提交按钮时 获取插件里得值
+                        });
+                </script>
+            </div>
+        }
+     }
+     else
+     {
+         @Html.Label("文章不存在")
+     }
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+}

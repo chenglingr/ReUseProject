@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<ReUse.Models.Account>
+@using PagedList.Mvc
+@{
+   
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section TitleSection{
+    Index
+}
+@section HeaderSection{
+    @*注释：这里放引入js css的代码  没有可省略本部分*@
+}
+@section ContentBody{
+    <div>
+       
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>邮箱</th>
+                    <th>地址</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ReUse.Models.Account item in Model)
+                {
+                    <tr>
+                        <td>@item.Email</td>
+                        <td>@item.Address</td>
+                        <td>
+                            @Html.ActionLink("详情", "Detail", new { id = item.ID })
+                            @Html.ActionLink("编辑", "Edit", new { id = item.ID })
+                            @Html.ActionLink("删除", "Delete", new { id = item.ID })
+                            @Html.ActionLink("文章", "ArticleList","Aritcle", new { id = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+        <div>每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页 @Html.PagedListPager(Model,page=>Url.Action("Index1",new { page}))</div>
+    </div>
+}
+

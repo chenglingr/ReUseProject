@@ -1,0 +1,33 @@
+﻿@model PagedList.IPagedList<ReUse.Models.Article>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "IndexList";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section ContentBody{
+    <h2>IndexList</h2>
+    <div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                @foreach (ReUse.Models.Article item in Model)
+                {
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">标题：@Html.ActionLink(@item.topic, "Detail", new { id = item.ID })</div>
+                        <div class="panel-body">
+                            @Html.Raw(@item.content.Substring(0, (@item.content.Length >= 100) ? 100 : @item.content.Length))
+                        </div>
+                        <div class="panel-footer">@Html.ActionLink(@item.Account.Email, "IndexList", new { id = item.AccountID })
+                        作者： 创建时间：@item.createTime 点击率：@item.clickCount </div>
+                    </div>
+                }
+
+                <div>每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页
+                 @Html.PagedListPager(Model, page => Url.Action("IndexList", new { page,id= ViewBag.Uid }))</div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+ }
+

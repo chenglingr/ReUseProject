@@ -1,0 +1,43 @@
+﻿@model ReUse.ViewModels.IndexViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section HeaderSection{
+ 
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+}
+@section ContentBody{
+<h2>Index</h2>
+    <div class="row body-content">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item">最新用户</li>
+                @foreach (ReUse.Models.Account item in Model.Accounts)
+                {
+                    <li class="list-group-item">
+                         @Html.ActionLink(@item.Email, "IndexList", new { id = item.ID }) 
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <h4>最热文章</h4>            <hr />
+            @foreach (ReUse.Models.Article item in Model.Articles)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">标题：@Html.ActionLink(@item.topic, "Detail", new { id = item.ID })</div>
+                    <div class="panel-body">
+                        @Html.Raw(@item.content.Substring(0, (@item.content.Length >= 100) ? 100 : @item.content.Length))
+                    </div>
+                    <div class="panel-footer">
+                        @Html.ActionLink(@item.Account.Email, "IndexList", new { id = item.AccountID })
+                    作者： 创建时间：@item.createTime 点击率：@item.clickCount
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+}

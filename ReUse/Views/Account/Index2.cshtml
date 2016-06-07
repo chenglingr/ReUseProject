@@ -1,0 +1,37 @@
+﻿@model ReUse.ViewModels.AccountListViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div> 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>邮箱</th>
+                    <th>地址</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ReUse.Models.Account item in Model.Accounts)
+                {
+                   <tr>
+                       <td>@item.Email</td>
+                       <td>@item.Address</td>
+                       <td>@Html.ActionLink("详情","Detail",new {id=item.ID})</td>
+                   </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

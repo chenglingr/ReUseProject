@@ -1,0 +1,36 @@
+﻿@model ReUse.Models.Account
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section TitleSection{
+    edit
+}
+@section HeaderSection{
+      <link href="~/Content/Site.css" rel="stylesheet" />   
+}
+@section ContentBody{
+   <div class="body-content">
+        <h2>编辑</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.ID)
+            <div>
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Address)
+                @Html.EditorFor(model => model.Address)
+            </div>
+            <div>
+                @Html.LabelFor(model => model.PassWord)
+                @Html.PasswordFor(model => model.PassWord)
+            </div>
+            <div>
+                <input type="submit" value="保存" />@Html.ActionLink("返回首页", "Index")
+            </div>
+        }
+   </div>
+  }
+
+

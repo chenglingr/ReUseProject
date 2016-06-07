@@ -1,0 +1,57 @@
+﻿@model ReUse.Models.Article
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section TitleSection{
+    detail
+}
+@section HeaderSection{
+    }
+@section ContentBody{
+    <div>
+        <h4>Article</h4>
+        <hr />
+        @{
+            if (@Model != null)
+            {
+                
+                       
+                        
+              
+                             
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Html.DisplayNameFor(model => model.topic) <span>:</span> 
+                         @Html.DisplayFor(model => model.topic)
+                    </div>
+                    <div class="panel-body">
+                        @Html.Raw(@Model.content)
+                    </div>
+                    <div class="panel-footer">
+                        @Html.DisplayNameFor(model => model.createTime) <span>: </span >
+                        @Html.DisplayFor(model => model.createTime)
+
+                        @Html.DisplayNameFor(model => model.clickCount)<span>:</span>
+                        @Html.DisplayFor(model => model.clickCount)
+
+                        @Html.DisplayNameFor(model => model.lastClickTime)<span>:</span>
+                        @Html.DisplayFor(model => model.lastClickTime)
+
+                        <span>作者</span>
+                        @Html.DisplayFor(model => model.Account.Email)
+                        
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <p>此贴不存在</p>
+            }
+        }
+    </div>
+    <p>     @Html.ActionLink("Back to List", "IndexList")</p>
+}

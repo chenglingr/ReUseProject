@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<ReUse.Models.Article>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "MyIndexList";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section HeaderSection{
+  
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/Validations.js"></script>
+}
+@section ContentBody{
+<h2>MyIndexList</h2>
+
+<table class="table">
+    <tr>
+        <th>主题</th><th>创建时间</th><th>点击率</th><th>最后点击</th><th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>            @Html.DisplayFor(modelItem => item.topic)        </td>
+            <td>            @Html.DisplayFor(modelItem => item.createTime)        </td>
+            <td>            @Html.DisplayFor(modelItem => item.clickCount)        </td>
+            <td>            @Html.DisplayFor(modelItem => item.lastClickTime)        </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Detail", new { id=item.ID },new { target = "_blank" }) |
+                <input type="button" onclick="Delete(@item.ID)" value="删除" class="btn btn-link"/>
+             
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("MyIndexList", new { page}))
+</div>
+}
