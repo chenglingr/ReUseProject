@@ -12,6 +12,7 @@ namespace ReUse.Controllers
         // GET: Want
         public ActionResult Index()
         {
+
             return View();
         }
     }
