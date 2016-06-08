@@ -15,10 +15,8 @@ namespace ReUse.Models
         public string GoodsName { get; set; }
         [DisplayName("物品图片")]
         public string Pic { get; set; }
-        [DisplayName("所属分类-大类")]
+        [DisplayName("所属分类")]
         public string Style1 { get; set; }
-        [DisplayName("所属分类-小类")]
-        public string Style2 { get; set; }
         [DisplayName("商品介绍")]
         public string Description { get; set; }
         [DisplayName("新旧程度")]
@@ -26,7 +24,7 @@ namespace ReUse.Models
         [DisplayName("交易类型")]
         public string ChangeType { get; set; }//交易类型：现金交易、积分交换、实物交换
         [DisplayName("交易价格")]
-        public decimal ChangPrice { get; set; }//-1为面议  0为免费赠送  （现金交易、积分交换）价格>0
+        public int ChangPrice { get; set; }//-1为面议  0为免费赠送  （现金交易、积分交换）价格>0
         [DisplayName("所需物品")]
         public string ChangeGoods { get; set; }
         [DisplayName("所在地区")]

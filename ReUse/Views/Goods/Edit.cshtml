@@ -1,28 +1,22 @@
 ﻿@model ReUse.Models.Goods
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-@section HeaderSection{
-    <link href="~/Ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.min.js"></script>
-    <script type="text/javascript" src="~/Ueditor/lang/zh-cn/zh-cn.js"></script>
- 
-}
-
 @section ContentBody{
-<h2>Add</h2>
+<h2>Edit</h2>
 
-@using (Html.BeginForm("Add", "Goods", FormMethod.Post, new { id = "myform" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <h4>Goods</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
         <div class="form-group">
             @Html.LabelFor(model => model.GoodsName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -42,10 +36,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Style1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Style1", ViewData["EnumStyle1"] as SelectList, new { @class = "form-control" })
+                @Html.EditorFor(model => model.Style1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Style1, "", new { @class = "text-danger" })
             </div>
         </div>
+
+       
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -58,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.News, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("News", ViewData["EnumNews"] as SelectList, new { @class = "form-control" })
+                @Html.EditorFor(model => model.News, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.News, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,8 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ChangeType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-               
-                @Html.DropDownList("ChangeType", ViewData["EnumChangeType"] as SelectList, new { @class = "form-control" })
+                @Html.EditorFor(model => model.ChangeType, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ChangeType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,8 +70,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ChangPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="number" min="-1" name="ChangPrice" id="ChangPrice" value="0" class = "form-control"/>
-               @Html.ValidationMessageFor(model => model.ChangPrice, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ChangPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChangPrice, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -105,22 +100,40 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.ClickNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ClickNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClickNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+       
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-<script type="text/javascript">
-            //实例化编辑器
-    var um = UM.getEditor('Description', { initialFrameWidth: null });//重写前面的textarea标签
-    um.setWidth("80%");//设置宽度
-    
-                $('#myform').submit(function () {
-                    $('#Description').val(um.getContent());//点击提交按钮时 获取插件里得值
-                });//
-</script>
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-}
+    }

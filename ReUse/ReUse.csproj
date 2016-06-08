@@ -139,6 +139,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\Common.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\TranController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -289,6 +290,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Goods\Add.cshtml" />
+    <Content Include="Views\Goods\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
