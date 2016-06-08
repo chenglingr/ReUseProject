@@ -4,10 +4,37 @@
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+@section HeaderSection{
+    <link href="~/Ueditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="~/Ueditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="~/Ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<link href="~/Content/JQuery.JSAjaxFileUploader.css" rel="stylesheet" />
+<script src="~/Scripts/js/JQuery.JSAjaxFileUploader.js"></script>
+<script src="~/Scripts/js/UpLoadImage.js"></script>
+ 
+}
+
 @section ContentBody{
 <h2>Add</h2>
+<div class="form-group">
+    <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <div>
+                <div id="testId"></div>
+                <div id="tb">
+                    <table id="tbl">
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
 
-@using (Html.BeginForm()) 
+        </div>
+</div>
+   <br /><br />
+@using (Html.BeginForm("Add", "Goods", FormMethod.Post, new { id = "myform" }))
 {
     @Html.AntiForgeryToken()
     
@@ -22,34 +49,22 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Pic, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pic, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pic, "", new { @class = "text-danger" })
-            </div>
-        </div>
+       
 
         <div class="form-group">
             @Html.LabelFor(model => model.Style1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Style1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Style1", ViewData["EnumStyle1"] as SelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Style1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Style2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Style2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Style2, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+             
+                @Html.TextArea("Description")
+
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,7 +72,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.News, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.News, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("News", ViewData["EnumNews"] as SelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.News, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +80,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ChangeType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ChangeType, new { htmlAttributes = new { @class = "form-control" } })
+               
+                @Html.DropDownList("ChangeType", ViewData["EnumChangeType"] as SelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ChangeType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -73,8 +89,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ChangPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ChangPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ChangPrice, "", new { @class = "text-danger" })
+                <input type="number" min="-1" name="ChangPrice" id="ChangPrice" value="0" class = "form-control"/>
+               @Html.ValidationMessageFor(model => model.ChangPrice, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,6 +98,7 @@
             @Html.LabelFor(model => model.ChangeGoods, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ChangeGoods, new { htmlAttributes = new { @class = "form-control" } })
+
                 @Html.ValidationMessageFor(model => model.ChangeGoods, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -89,7 +106,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Area", ViewData["EnumArea"] as SelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -109,6 +126,16 @@
         </div>
     </div>
 }
+
+<script type="text/javascript">
+            //实例化编辑器
+    var um = UM.getEditor('Description', { initialFrameHeight: 300, initialFrameWidth: null });//重写前面的textarea标签
+  //  um.setWidth("20%");//设置宽度
+  
+                $('#myform').submit(function () {
+                    $('#Description').val(um.getContent());//点击提交按钮时 获取插件里得值
+                });//
+</script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
