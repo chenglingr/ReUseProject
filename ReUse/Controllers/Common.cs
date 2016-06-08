@@ -21,6 +21,12 @@ public enum ChangeType
     积分交换,
     实物交换    
 }
+public enum Area
+{
+    东区,
+    石岐区,
+    火炬区
+}
 public enum ChangPriceType
 {
     面议=-1,
@@ -45,4 +51,8 @@ public class EnumExt
         return li;
     }
 }
-  
+public class UploadFileResult
+{
+    public string FileName { get; set; }
+    public string FilePath { get; set; }
+}

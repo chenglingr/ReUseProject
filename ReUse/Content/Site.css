@@ -33,3 +33,8 @@ textarea {
 .myinput {
     max-width: 580px;
 }
+
+.showImg {
+    width: 200px;
+    height: 200px;
+}
