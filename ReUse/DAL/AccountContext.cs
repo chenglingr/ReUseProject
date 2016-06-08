@@ -12,7 +12,6 @@ namespace ReUse.DAL
         public AccountContext():base("AccountContext") { }
         public DbSet<ReUse.Models.Account> Accounts { get; set; }
         public DbSet<ReUse.Models.Article> Articles { get; set; }
-
         public DbSet<ReUse.Models.Comment> Comments { get; set; }
         public DbSet<ReUse.Models.Goods> Goodss { get; set; }
         public DbSet<ReUse.Models.Tran> Trans { get; set; }
