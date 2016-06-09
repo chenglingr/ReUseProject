@@ -1,0 +1,79 @@
+﻿@model ReUse.Models.Goods
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section ContentBody{
+<h2>Detail</h2>
+     <hr />
+ 
+       @{
+           if (@Model != null)
+           {
+             <div class="row">
+                <div class="col-md-2 col-sm-3 hidden-xs">
+                  @{ Html.RenderPartial("StyleList");}
+                </div>
+                <div class="col-md-10 col-sm-9 ">
+                   
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img alt="物品图片" class="product-set-image img-responsive" src="@Model.Pic">
+                        </div>
+                        <div class="col-md-6">
+                                <h3>@Html.DisplayFor(model => model.GoodsName)</h3>
+                                <hr />
+                                @Html.Raw(@Model.Description)                      
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="list-group">
+                                <li class="list-group-item">物主：    @Html.DisplayFor(model => model.User.UserName)</li>
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.Style1)：     @Html.DisplayFor(model => model.Style1)</li>
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.News)：      @Html.DisplayFor(model => model.News)</li>
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.ChangeType)：      @Html.DisplayFor(model => model.ChangeType)</li>
+                               @if (Model.ChangeType == "实物交换")
+                               {
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.ChangeGoods)：   @Html.DisplayFor(model => model.ChangeGoods)</li>
+                               }
+                               else
+                               {
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.ChangPrice)：   @Html.DisplayFor(model => model.ChangPrice)</li>
+                               }
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.Area)：  @Html.DisplayFor(model => model.Area)</li>
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.Address)： @Html.DisplayFor(model => model.Address)</li>
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.ClickNum)： @Html.DisplayFor(model => model.ClickNum)</li>
+                                <li class="list-group-item">@Html.DisplayNameFor(model => model.CreatDate)：  @Html.DisplayFor(model => model.CreatDate)</li>
+                                @if (Model.State == 0)
+                                {
+                                    <li class="list-group-item">状态：等待交易 </li>
+                                }
+                                else if (Model.State == 1)
+                                {
+                                    <li class="list-group-item">状态：交易成功</li>
+                                }
+                                else
+                                {
+                                    <li class="list-group-item">状态：撤销交易</li>
+                                }
+
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div class="divider">&nbsp;</div>
+                    <br>
+                 </div>
+             </div>        
+
+           }
+           else
+           {
+            <p>此贴不存在</p>
+           }
+    }
+
+<p>
+     @Html.ActionLink("Back to List", "Index")
+</p>
+}

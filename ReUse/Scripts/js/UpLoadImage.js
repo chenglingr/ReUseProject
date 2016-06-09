@@ -19,8 +19,9 @@
         },
         success: function (data) {
             createTableTr();
+
             $('#tbl').show();
-         
+            $('#Pic').val(data.path);
             $('.showImg').attr("src", data.path);
             $('.imgName').text(data.name);
         },
@@ -47,7 +48,7 @@ function deleteImg() {
             if (data.msg) {
                 //alert("图片删除成功");
                 $('.delImg').parent().parent().remove();
-
+                $('#Pic').val("");
             }
         },
         error: function (jqXhr, textStatus, errorThrown) {

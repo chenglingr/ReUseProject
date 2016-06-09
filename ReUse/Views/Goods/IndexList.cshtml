@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<ReUse.Models.Goods>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "IndexList";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section ContentBody{
+    <h2>IndexList</h2>
+    <div>
+    @using (Html.BeginForm("IndexList", "Goods", FormMethod.Post, new { @class = "form-inline" }))
+    {
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                物品种类： @Html.DropDownList("style", ViewData["EnumStyle1"] as SelectList, new { @class = "form-control serachinput" })
+                物品名称： @Html.TextBox("search", "", new { @class = "form-control serachinput" })
+                <input type="submit" class="btn btn-default" value="查询" />
+            </div>
+        </div>
+
+    }
+
+        <div class="row">
+            <div class="col-md-2 col-sm-3 hidden-xs">
+                @{ Html.RenderPartial("StyleList");}
+            </div>
+            <div class="col-md-10 col-sm-9 ">
+                @foreach (ReUse.Models.Goods item in Model)
+                {
+                    <div class="row rowGoods" >
+                        <div class="col-md-3 col-sm-3 col-xs-4">
+                            <a href="/waltz-cake"  >
+                                <img class="product-set-image img-responsive" src="@item.Pic" >
+                                
+                            </a>
+                        </div>
+                        <div class="col-md-9 col-sm-9 col-xs-8 " >
+                            <div>
+                                <a href="/citi" class="product-set-header" >@item.GoodsName</a>
+                                <div class="product-price-info" >
+                                    @item.ChangeType 
+                                    @if (item.ChangeType == "实物交换")
+                                    {
+                                        <span> @item.ChangeGoods </span>
+                                    }
+                                    else if (item.ChangeType == "现金交易")
+                                    {
+                                       <span> @item.ChangPrice 元</span>
+                                    }
+                                    else
+                                    { <span> @item.ChangPrice 积分</span>}
+                                </div>
+                                <div class="product-medium-description" >
+                                    @if (@item.State == 0)
+                                    {
+                                       <span>状态：等待交易</span> 
+                                    }
+                                    else if (@item.State == 1)
+                                    {
+                                        <span>状态：交易成功</span>
+                                    }
+                                    else
+                                    {
+                                        <span>状态：撤销交易</span>
+                                     }
+                                    <br />
+                                    新旧程度： @item.News<br />
+                                    点击量： @item.ClickNum<br />
+                                    发布时间： @item.CreatDate<br />
+                                    所在地区： @item.Area<br />
+                                    @if(@item.Address!=""){<span>交易地点：</span>@item.Address}
+                                   
+                                </div>
+                               
+                            </div>
+                            <hr />
+                            <div class="row text-right" >
+                                <div class="hidden-xs col-md-1 col-sm-1" >
+                                    <div class="product-set-pc" >...</div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-5">
+                                    @Html.ActionLink("查看详情", "Detail", new { id = item.ID })
+                                </div>
+                                 <div class="col-md-5 col-sm-5 col-xs-7 text-center" >@Html.ActionLink("联系物主", "Index")</div>
+                             </div>
+                            <hr />
+                           
+                        </div>
+                    </div>
+
+                }
+
+                <div>
+                    每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页
+                  
+                    @Html.PagedListPager(Model, page => Url.Action("IndexList", new { page, id = ViewBag.Uid, search= ViewBag.search, style=ViewBag.style }))
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+}

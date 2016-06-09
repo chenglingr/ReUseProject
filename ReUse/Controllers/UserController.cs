@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +15,29 @@ namespace ReUse.Controllers
         {
             return View();
         }
+        //修改用户
+        [Authorize]
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+            {
+                if (Session["UserID"] != null)
+                {
+                    id = int.Parse(Session["UserID"].ToString());
+                }
+            }
+            Models.User acc = db.Users.Find(id);
+            return View(acc);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Models.User acc)
+        {
+            //加上 using System.Data.Entity;
+            db.Entry(acc).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Add","Goods");
+        }
         #region 登录
         public ActionResult Login()
         {
@@ -27,7 +51,7 @@ namespace ReUse.Controllers
             {
                 FormsAuthentication.SetAuthCookie(UserName, false);//新增=acc
                 Session["UserID"] = acc.First().ID;//新增
-                return RedirectToAction("Add","Goods");
+                return RedirectToAction("Edit","User");
             }
             else
             {

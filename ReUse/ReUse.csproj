@@ -294,7 +294,11 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Goods\Add.cshtml" />
-    <Content Include="Views\Goods\Add1.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Goods\Detail.cshtml" />
+    <Content Include="Views\Goods\Index.cshtml" />
+    <Content Include="Views\Goods\IndexList.cshtml" />
+    <Content Include="Views\Shared\StyleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,12 +27,7 @@ public enum Area
     石岐区,
     火炬区
 }
-public enum ChangPriceType
-{
-    面议=-1,
-    免费赠送=0,
-    交易金额=1
-}
+
 
 public class EnumExt
 {

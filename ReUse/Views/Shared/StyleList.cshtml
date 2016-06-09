@@ -1,0 +1,12 @@
+﻿<div class="list-group">
+
+    @{ 
+            var style = ViewData["EnumStyle1"] as SelectList;
+            foreach (var item in style)
+            {      
+              
+                @Html.ActionLink(item.Text, "IndexList", new { style = item.Text }, new { @class = "list-group-item" })
+           
+            }
+    }
+</div>

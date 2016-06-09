@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@section ContentBody{
+<h2>Index</h2>
+
+<div class="jumbotron text-center">
+    <form class="form-inline" method="post" action="/Goods/IndexList">
+        <div class="form-group">
+            <input type="search" class="form-control serachinput1" id="search" name="search" placeholder="请输入感兴趣的物品名称">
+        </div>
+        <button type="submit" class="btn btn-success">搜搜看</button>
+        
+    </form>
+</div>
+}

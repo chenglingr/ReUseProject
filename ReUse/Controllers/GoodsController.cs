@@ -1,9 +1,13 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace ReUse.Controllers
 {
@@ -11,28 +15,71 @@ namespace ReUse.Controllers
     {
         private DAL.AccountContext db = new DAL.AccountContext();
         // GET: Goods
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Detail(int? id)
+        {
+            ViewData["EnumStyle1"] = new SelectList(EnumExt.ToListItem<Style1>(), "text", "text");
+            Models.Goods art = db.Goodss.Find(id);
+            if (art != null)
+            {
+                art.ClickNum = art.ClickNum + 1;//修改点击率
+                db.Entry(art).State = EntityState.Modified;
+                db.SaveChanges();//保存修改
+            }
+            return View(art);
+        }
         #region 增加
-       // [Authorize]
+        [Authorize]
         public ActionResult Add()
         {
-            ViewData["EnumStyle1"] = new SelectList(EnumExt.ToListItem<Style1>(), "value", "text");
-            ViewData["EnumNews"] = new SelectList(EnumExt.ToListItem<News>(), "value", "text");
-            ViewData["EnumChangeType"] = new SelectList(EnumExt.ToListItem<ChangeType>(), "value", "text");
-            ViewData["EnumChangPriceType"] = new SelectList(EnumExt.ToListItem<ChangPriceType>(), "value", "text");
-            ViewData["EnumArea"] = new SelectList(EnumExt.ToListItem<Area>(), "value", "text");
+            setContent();
             return View();
         }
-        public ActionResult Add1() {
-            return View();
+        /// <summary>
+        /// 设置基础数据 类型、新旧程度 交易类型 地区
+        /// </summary>
+        public void setContent()
+        {
+            ViewData["EnumStyle1"] = new SelectList(EnumExt.ToListItem<Style1>(), "text", "text");
+            ViewData["EnumNews"] = new SelectList(EnumExt.ToListItem<News>(), "text", "text");
+            ViewData["EnumChangeType"] = new SelectList(EnumExt.ToListItem<ChangeType>(), "text", "text");
+            ViewData["EnumArea"] = new SelectList(EnumExt.ToListItem<Area>(), "text", "text");
+         
         }
         [HttpPost]
+        [ValidateInput(false)]
+        [Authorize]
         public ActionResult Add(Models.Goods model)
         {
             model.CreatDate = DateTime.Now;
             model.ClickNum = 0;
             model.State =0;
-            model.UserID = 1;
-            return View();
+
+            if (Session["UserID"] == null)
+            {
+                FormsAuthentication.SignOut();//清除假登陆状态
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                model.UserID= int.Parse(Session["UserID"].ToString());//获取作者id
+                if (ModelState.IsValid)//执行服务端的验证
+                {
+                    db.Goodss.Add(model);//增加
+                    db.SaveChanges();//保y
+                    return RedirectToAction("MyIndexList");
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", "添加失败，请重填");//
+                    setContent();
+                    return View();
+                }
+            }
+
         }
         [HttpPost]
         public ActionResult UploadFile()
@@ -101,9 +148,46 @@ namespace ReUse.Controllers
             return result;
         }
         #endregion
-        public ActionResult Index()
+
+        /// <summary>
+        /// 二手物品列表
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="id">用户ID</param>
+        /// <param name="search">物品名</param>
+        /// <param name="style">物品类别</param>
+        /// <returns></returns>
+        public ActionResult IndexList(int? page, int? id,string search,string style)
         {
-            return View();
+            //用户列表
+            ViewBag.search = search;
+            ViewBag.style = style;
+            ViewBag.id = id;
+            var art = from m in db.Goodss where m.State==0 select m;
+            if (id.HasValue)
+            {  
+              art = art.Where(b=>b.UserID==id);
+            }
+            // books = books.Where(s => s.Name.Contains(searchString));
+            if (!String.IsNullOrEmpty(search) )
+            {
+                art = art.Where(s => s.GoodsName.Contains(search));
+           }
+            if (!string.IsNullOrEmpty(style))
+            {
+               art=  art.Where(x => x.Style1 ==style);
+            }
+            ViewData["EnumStyle1"] = new SelectList(EnumExt.ToListItem<Style1>(), "text", "text");
+            //第几页
+            int pageNumber = page ?? 1;
+            //每页显示多少条
+            int pageSize = int.Parse(ConfigurationManager.AppSettings["pageSize"]);
+            //根据创建时间 降序排序
+            var art1 = art.OrderByDescending(x => x.CreatDate);
+            //通过topagelist扩展方法进行分页
+            IPagedList<ReUse.Models.Goods> pageList = art1.ToPagedList(pageNumber, pageSize);
+            return View(pageList);
+
         }
     }
 }
