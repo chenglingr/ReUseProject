@@ -20,7 +20,9 @@
 .dl-horizontal dt {
     white-space: normal;
 }
-
+.jumbotron {
+      background: #1a86c0;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -30,9 +32,62 @@ textarea {
 .serachinput {
      max-width: 200px;
 }
-.serachinput1 {
-     max-width: 580px;
+
+
+/* search */
+#hero {
+  min-height: 10em;
+  background: #1a86c0;
+ 
 }
+#hero .row {
+  margin-top: 3em;
+  color: #fff;
+  text-align: center;
+}
+ #hero h2 {
+  font-weight: 100;
+}
+
+ #hero .form-control {
+  float: left;
+  width: 75%;
+  display: block;
+  height: 45px;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.428571429;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #73C1EA;
+  border-radius: 4px;
+  box-shadow: none;
+}
+#hero .btn-custom {
+  color: #FFF;
+  background-color: #1A86C0;
+  border-color: #73C1EA;
+  height: 45px;
+  padding: 0px 12px;
+  text-transform: uppercase;
+  width: 21%;
+  float: right;
+}
+/*search end*/
+/*index*/
+.front-page-header {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-align: left;
+  color: #249136;
+}
+.product-category-link {
+  color: #838383;
+  font-size: 14px;
+}
+
+/*index end*/
 .width50 {
     width:50%;
 }

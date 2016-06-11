@@ -36,7 +36,7 @@ namespace ReUse.Controllers
             //加上 using System.Data.Entity;
             db.Entry(acc).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Add","Goods");
+            return RedirectToAction("MyIndexList", "Goods");
         }
         #region 登录
         public ActionResult Login()
@@ -51,7 +51,7 @@ namespace ReUse.Controllers
             {
                 FormsAuthentication.SetAuthCookie(UserName, false);//新增=acc
                 Session["UserID"] = acc.First().ID;//新增
-                return RedirectToAction("Edit","User");
+                return RedirectToAction("MyIndexList", "Goods");
             }
             else
             {

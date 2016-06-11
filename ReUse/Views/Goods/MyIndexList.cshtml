@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<ReUse.Models.Goods>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "MyIndexList";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@section HeaderSection{
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/date.format.js"></script>
+    <script src="~/Scripts/js/MyIndexList.js"></script>
+}
+@section ContentBody{
+<h2>MyIndexList</h2>
+<table class="table">
+    <tr>
+        <th>物品名</th>
+        <th>发布时间</th>
+        <th>点击率</th>
+        <th>状态</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>     @Html.ActionLink(item.GoodsName, "Detail", new { id = item.ID }, new { target = "_blank" })  </td>
+            <td>            @Html.DisplayFor(modelItem => item.CreatDate)        </td>
+            <td>            @Html.DisplayFor(modelItem => item.ClickNum)        </td>
+            <td>         
+               @if (item.State == 0)
+                { <span>等待交易</span> }
+                else if (item.State == 1)
+                { <span>交易成功</span> }
+                else
+                { <span>撤销交易</span> }
+            </td>
+            <td>
+               
+                @Html.ActionLink("详细", "Detail", new { id = item.ID }, new { target = "_blank" })  &nbsp; &nbsp;
+                <input type="button" onclick="Delete1(@item.ID)" value="删除" class="btn btn-link" />
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditState" data-whatever="@item.ID" data-state="@item.State">修改状态</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ShowTran" data-whatever="@item.ID">查看交易请求</button>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页
+    @Html.PagedListPager(Model, page => Url.Action("MyIndexList", new { page }))
+</div>
+
+<div class="modal fade" id="EditState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exabel">修改物品状态</h4>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <div class="form-group">
+                        <button id="btnwait" type="button" class="btn btn-success">等待交易</button>
+                        <button id="btnok" class="btn btn-default" type="button">交易成功</button>
+                        <button id="btncancel" class="btn btn-default" type="button">撤销交易</button>
+                    </div>
+                    <div class="form-group text-right">
+                        <button id="btnsubmit" type="button"  class="btn btn-danger">提交更改</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ShowTran" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exabel">交易请求留言</h4>
+            </div>
+            <div class="modal-body">
+               <div id="Trans"></div>
+            </div>
+        </div>
+    </div>
+</div>
+}

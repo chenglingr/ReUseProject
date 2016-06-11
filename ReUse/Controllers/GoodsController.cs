@@ -17,7 +17,52 @@ namespace ReUse.Controllers
         // GET: Goods
         public ActionResult Index()
         {
-            return View();
+            ViewModels.GoodsIndexViewModel model = new ViewModels.GoodsIndexViewModel();
+            model.HotGoodss = db.Goodss.Where(b=>b.State==0).OrderByDescending(a => a.ClickNum).Skip(0).Take(4).ToList();
+            model.NewGoodss = db.Goodss.Where(b => b.State == 0).OrderByDescending(a => a.CreatDate).Skip(0).Take(4).ToList();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditState(int? id,int? state)
+        {
+            Models.Goods art = db.Goodss.Find(id);
+            int state1 = state ?? 0;
+            art.State = state1;
+            db.Entry(art).State = EntityState.Modified;
+            db.SaveChanges();
+            return Content("ok");
+        }
+        [Authorize]
+        public ActionResult MyIndexList(int? page)
+        {
+            int id = 0;
+            if (Session["UserID"] != null)//判断是否登录
+            {
+                id = int.Parse(Session["UserID"].ToString());
+                var art = db.Goodss.Where(b => b.UserID == id);
+                //第几页
+                int pageNumber = page ?? 1;
+                //每页显示多少条
+                int pageSize = int.Parse(ConfigurationManager.AppSettings["pageSize"]);
+                //根据创建时间 降序排序
+                var art1 = art.OrderByDescending(x => x.CreatDate);
+                //通过topagelist扩展方法进行分页
+                IPagedList<ReUse.Models.Goods> pageList = art1.ToPagedList(pageNumber, pageSize);
+                return View(pageList);
+            }
+            else
+            {
+                FormsAuthentication.SignOut();//清除假登陆状态
+                return RedirectToAction("Login","User");
+            }
+        }
+        [HttpPost]
+        public ActionResult Delete(int? id)
+        {
+            Models.Goods  art = db.Goodss.Find(id);
+            db.Goodss.Remove(art);
+            db.SaveChanges();
+            return RedirectToAction("MyIndexList");
         }
         public ActionResult Detail(int? id)
         {

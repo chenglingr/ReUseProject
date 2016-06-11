@@ -4,6 +4,13 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
+@section HeaderSection{
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/ShowTrans.js"></script>
+
+}
 @section ContentBody{
 <h2>Detail</h2>
      <hr />
@@ -23,12 +30,22 @@
                         </div>
                         <div class="col-md-6">
                                 <h3>@Html.DisplayFor(model => model.GoodsName)</h3>
+                          
+                            @{
+                                var ta = "";
+                                if (Model.User.QQ != "") { ta = "QQ:" + Model.User.QQ+ "&nbsp;&nbsp;"; }
+                                if (Model.User.Email != "") { ta = ta + "邮箱：" + Model.User.Email+ "<br/>"; }
+                                if (Model.User.WeiXin != "") { ta = ta + "微信：" + Model.User.WeiXin+ "&nbsp;&nbsp;"; }
+                                if (Model.User.Tel != "") { ta = ta + "电话：" + Model.User.Tel; }
+                                if (ta == "") { ta = "暂无物主联系方式，请站内联络"; }
+                                <button type="button" class="btn btn-default " data-toggle="modal" data-target="#ShowTrans" data-whatever="@Model.ID" data-tel="@ta">联系物主</button>
+                            }
                                 <hr />
                                 @Html.Raw(@Model.Description)                      
                         </div>
                         <div class="col-md-3">
                             <ul class="list-group">
-                                <li class="list-group-item">物主：    @Html.DisplayFor(model => model.User.UserName)</li>
+                                <li class="list-group-item ">物主：    @Html.DisplayFor(model => model.User.UserName)</li>
                                 <li class="list-group-item">@Html.DisplayNameFor(model => model.Style1)：     @Html.DisplayFor(model => model.Style1)</li>
                                 <li class="list-group-item">@Html.DisplayNameFor(model => model.News)：      @Html.DisplayFor(model => model.News)</li>
                                 <li class="list-group-item">@Html.DisplayNameFor(model => model.ChangeType)：      @Html.DisplayFor(model => model.ChangeType)</li>
@@ -76,4 +93,9 @@
 <p>
      @Html.ActionLink("Back to List", "Index")
 </p>
+@{
+    Html.RenderPartial("ShowTrans");
+}
+
+
 }

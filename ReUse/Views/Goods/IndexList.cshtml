@@ -4,6 +4,13 @@
     ViewBag.Title = "IndexList";
     Layout = "~/Views/Shared/MyLayout.cshtml";
 }
+@section HeaderSection{
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/ShowTrans.js"></script>
+
+}
 @section ContentBody{
     <h2>IndexList</h2>
     <div>
@@ -36,39 +43,45 @@
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-8 " >
                             <div>
-                                <a href="/citi" class="product-set-header" >@item.GoodsName</a>
+                                @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID }, new { @class="product-set-header"})
+                                <br /><br />
                                 <div class="product-price-info" >
-                                    @item.ChangeType 
+                                    <span class="label label-danger"> @item.ChangeType </span> &nbsp;&nbsp;
                                     @if (item.ChangeType == "实物交换")
                                     {
-                                        <span> @item.ChangeGoods </span>
+                                        <span class="label label-primary"> @item.ChangeGoods </span>
                                     }
                                     else if (item.ChangeType == "现金交易")
                                     {
-                                       <span> @item.ChangPrice 元</span>
+                                       <span class="label label-primary"> @item.ChangPrice 元</span>
                                     }
                                     else
-                                    { <span> @item.ChangPrice 积分</span>}
+                                    { <span class="label label-primary"> @item.ChangPrice 积分</span>}
                                 </div>
+                                <br />
                                 <div class="product-medium-description" >
                                     @if (@item.State == 0)
                                     {
-                                       <span>状态：等待交易</span> 
+                                       <span class="label label-info">状态：等待交易</span> 
                                     }
                                     else if (@item.State == 1)
                                     {
-                                        <span>状态：交易成功</span>
+                                        <span class="label label-info">状态：交易成功</span>
                                     }
                                     else
                                     {
-                                        <span>状态：撤销交易</span>
+                                        <span class="label label-info">状态：撤销交易</span>
                                      }
-                                    <br />
-                                    新旧程度： @item.News<br />
-                                    点击量： @item.ClickNum<br />
-                                    发布时间： @item.CreatDate<br />
-                                    所在地区： @item.Area<br />
-                                    @if(@item.Address!=""){<span>交易地点：</span>@item.Address}
+                                    &nbsp;&nbsp;
+                                    <span class="label label-warning"> 新旧程度： @item.News</span>
+                                    &nbsp;&nbsp;
+                                    <span class="label label-success">点击量：<span class="badge">@item.ClickNum</span></span>
+                                     <br /><br />
+                                    <span class="label label-primary">发布时间： @item.CreatDate</span>
+                                    <br /><br />
+                                    <span class="label label-warning">所在地区： @item.Area</span>&nbsp;&nbsp;
+                                   
+                                    @if(@item.Address!=""){<span class="label label-default">交易地点：@item.Address</span>}
                                    
                                 </div>
                                
@@ -79,9 +92,19 @@
                                     <div class="product-set-pc" >...</div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-5">
-                                    @Html.ActionLink("查看详情", "Detail", new { id = item.ID })
+                                    @Html.ActionLink("查看详情", "Detail", new { id = item.ID },new {@class="btn btn-default "  })
                                 </div>
-                                 <div class="col-md-5 col-sm-5 col-xs-7 text-center" >@Html.ActionLink("联系物主", "Index")</div>
+                                 <div class="col-md-5 col-sm-5 col-xs-7 text-center" >
+                              
+                                     @{
+                                         var ta = "";
+                                         if (item.User.QQ != "") { ta = "QQ:" + item.User.QQ+ "&nbsp;&nbsp;"; }
+                                         if (item.User.Email != "") { ta = ta + "邮箱：" + item.User.Email+ "<br/>"; }
+                                         if (item.User.WeiXin != "") { ta = ta + "微信：" + item.User.WeiXin+ "&nbsp;&nbsp;"; }
+                                         if (item.User.Tel != "") { ta = ta + "电话：" + item.User.Tel; }
+                                         <button type="button" class="btn btn-default " data-toggle="modal" data-target="#ShowTrans" data-whatever="@item.ID" data-tel="@ta">联系物主</button>
+                                     }
+                                 </div>
                              </div>
                             <hr />
                            
@@ -98,6 +121,8 @@
             </div>
         </div>
         </div>
-
+@{
+    Html.RenderPartial("ShowTrans");
+}
 
 }

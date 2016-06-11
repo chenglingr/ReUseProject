@@ -157,10 +157,31 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Want.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\GoodsIndexViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
+    <Compile Include="ViewModels\ShowTran.cs" />
     <Content Include="Content\JQuery.JSAjaxFileUploader.css" />
+    <Content Include="img\animate.png" />
+    <Content Include="img\icons\delete.png" />
+    <Content Include="img\icons\doc.png" />
+    <Content Include="img\icons\docx.png" />
+    <Content Include="img\icons\done.png" />
+    <Content Include="img\icons\excel.png" />
+    <Content Include="img\icons\media.png" />
+    <Content Include="img\icons\music.png" />
+    <Content Include="img\icons\pdf.png" />
+    <Content Include="img\icons\start.png" />
+    <Content Include="img\icons\stop.png" />
+    <Content Include="img\icons\txt.png" />
+    <Content Include="img\icons\unknown.png" />
+    <Content Include="img\icons\xml.png" />
+    <Content Include="img\product.png" />
+    <Content Include="img\s_bg.jpg" />
+    <Content Include="img\yue-sprit001.png" />
     <Content Include="Scripts\js\JQuery.JSAjaxFileUploader.js" />
     <Content Include="Scripts\js\JQuery.JSAjaxFileUploader.min.js" />
+    <Content Include="Scripts\js\MyIndexList.js" />
+    <Content Include="Scripts\js\ShowTrans.js" />
     <Content Include="Scripts\js\UpLoadImage.js" />
     <Content Include="Ueditor\net\Uploader.cs" />
     <Compile Include="ViewModels\AccountListViewModel.cs" />
@@ -176,6 +197,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="DOC\数据库设计.doc" />
+    <None Include="Properties\PublishProfiles\reusezspt.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -257,6 +279,19 @@
     <Content Include="Ueditor\umeditor.config.js" />
     <Content Include="Ueditor\umeditor.js" />
     <Content Include="Ueditor\umeditor.min.js" />
+    <Content Include="Upload\20160608091208.jpg" />
+    <Content Include="Upload\20160608091349.jpg" />
+    <Content Include="Upload\20160608092039.jpg" />
+    <Content Include="Upload\20160608092752.jpg" />
+    <Content Include="Upload\20160608092839.jpg" />
+    <Content Include="Upload\20160608093333.jpg" />
+    <Content Include="Upload\20160609080858.jpg" />
+    <Content Include="Upload\20160610124648.jpg" />
+    <Content Include="Upload\20160611104740.jpg" />
+    <Content Include="Upload\20160611105114.jpg" />
+    <Content Include="Upload\20160611105247.jpg" />
+    <Content Include="Upload\20160611105523.jpg" />
+    <Content Include="Upload\20160611105728.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -299,6 +334,8 @@
     <Content Include="Views\Goods\Index.cshtml" />
     <Content Include="Views\Goods\IndexList.cshtml" />
     <Content Include="Views\Shared\StyleList.cshtml" />
+    <Content Include="Views\Goods\MyIndexList.cshtml" />
+    <Content Include="Views\Shared\ShowTrans.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

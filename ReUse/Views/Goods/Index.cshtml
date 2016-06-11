@@ -1,18 +1,120 @@
-﻿
+﻿@model ReUse.ViewModels.GoodsIndexViewModel
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/MyLayout.cshtml";
+      Layout = "~/Views/Shared/MyLayout.cshtml";
 }
+@section HeaderSection{
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/ShowTrans.js"></script>
+
+}
+
+
 @section ContentBody{
 <h2>Index</h2>
+<div id="hero">
+    <div class="container">
+        <div class="row">
+           <form class="col-md-6 col-md-offset-3" role="search" method="post" action="/Goods/IndexList">
+                <div class="form-group">
+                    <input name="search" type="text" id="search" class="form-control col-xs-8" placeholder="请输入感兴趣的物品名称">
+                    <button type="submit" class="btn btn-custom col-lg-3 col-xs-3">搜搜看</button>
+                </div>
 
-<div class="jumbotron text-center">
-    <form class="form-inline" method="post" action="/Goods/IndexList">
-        <div class="form-group">
-            <input type="search" class="form-control serachinput1" id="search" name="search" placeholder="请输入感兴趣的物品名称">
+            </form>
         </div>
-        <button type="submit" class="btn btn-success">搜搜看</button>
-        
-    </form>
+    </div>
 </div>
+<div class="container center">
+    <div class="row">
+        <div class="front-page-header">
+            <span class="caret caret-right"></span>
+            <b>
+                <a href="#">最新发布</a>
+            </b>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (ReUse.Models.Goods item in Model.NewGoodss)
+        {
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <div>
+                        <img src="@item.Pic" class="img-responsive"  alt="...">
+                     
+                    </div>
+                    <div class="caption">
+                        <h3>
+                            <a class="product-category-link" href="/citit-box">
+                                @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID })
+                            </a>
+                        </h3>
+                        <p><span class="label label-success">@item.News </span>&nbsp;&nbsp;<span class="label label-info">点击量：<span class="badge">@item.ClickNum </span></span> </p><p><span class="label label-warning">发布时间：@item.CreatDate</span></p>
+                      <div class="text-center">
+                            @Html.ActionLink("查看详情", "Detail", new { id = item.ID },new { @class= "btn btn-default" })
+                          @{
+                              var ta = "";
+                              if (item.User.QQ != "") { ta = "QQ:" + item.User.QQ+ "&nbsp;&nbsp;"; }
+                              if (item.User.Email != "") { ta = ta + "邮箱：" + item.User.Email+ "<br/>"; }
+                              if (item.User.WeiXin != "") { ta = ta + "微信：" + item.User.WeiXin+ "&nbsp;&nbsp;"; }
+                              if (item.User.Tel != "") { ta = ta + "电话：" + item.User.Tel; }
+                              <button type="button" class="btn btn-default " data-toggle="modal" data-target="#ShowTrans" data-whatever="@item.ID" data-tel="@ta">联系物主</button>
+                          }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+        <div class="front-page-header">
+            <span class="caret caret-right"></span>
+            <b>
+                <a href="#">最热物品</a>
+            </b>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (ReUse.Models.Goods item in Model.HotGoodss)
+        {
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <div>
+                        <img src="@item.Pic" class="img-responsive" alt="...">
+                    </div>
+                    <div class="caption">
+                        <h3>
+                            <a class="product-category-link" href="/citit-box">
+                                @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID })
+                            </a>
+                        </h3>
+                        <p><span class="label label-success">@item.News </span>&nbsp;&nbsp;<span class="label label-info">点击量：<span class="badge">@item.ClickNum </span></span> </p><p><span class="label label-warning">发布时间：@item.CreatDate</span></p>
+                        <div class="text-center">
+                            @Html.ActionLink("查看详情", "Detail", new { id = item.ID }, new { @class = "btn btn-default" })
+                           @{ 
+                               var ta="";
+                               if (item.User.QQ != "") { ta ="QQ:" +item.User.QQ+ "&nbsp;&nbsp;"; }
+                               if (item.User.Email != "") { ta =ta+ "邮箱：" + item.User.Email+ "<br/>"; }
+                               if (item.User.WeiXin != "") { ta = ta + "微信：" + item.User.WeiXin+ "&nbsp;&nbsp;"; }
+                               if (item.User.Tel != "") { ta = ta + "电话：" + item.User.Tel; }
+                         <button type="button" class="btn btn-default " data-toggle="modal" data-target="#ShowTrans" data-whatever="@item.ID" data-tel="@ta">联系物主</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+   
+</div>
+ <br />
+ <hr />
+    @{
+        Html.RenderPartial("ShowTrans");
+    }
+
 }
