@@ -41,11 +41,10 @@
         {
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <div>
-                        <img src="@item.Pic" class="img-responsive"  alt="...">
-                     
+                    <div >
+                        <img src="@item.Pic" class="img-responsive showImg1 "  alt="...">                     
                     </div>
-                    <div class="caption">
+                    <div class="caption text-center">
                         <h3>
                             <a class="product-category-link" href="/citit-box">
                                 @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID })
@@ -83,10 +82,10 @@
         {
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <div>
-                        <img src="@item.Pic" class="img-responsive" alt="...">
+                    <div >
+                        <img src="@item.Pic" class="img-responsive showImg1" alt="...">
                     </div>
-                    <div class="caption">
+                    <div class="caption text-center">
                         <h3>
                             <a class="product-category-link" href="/citit-box">
                                 @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID })

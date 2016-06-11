@@ -98,9 +98,13 @@ textarea {
 .showImg {
     width: 200px;
     height: 200px;
-     border-radius:5px;
+    border-radius:5px;
 }
-
+.showImg1 {
+    width: 200px;
+    height: 200px;
+    border-radius:5px;
+}
 .size-selection {
   width: 70px;
   padding-top: 10px;

@@ -279,14 +279,6 @@
     <Content Include="Ueditor\umeditor.config.js" />
     <Content Include="Ueditor\umeditor.js" />
     <Content Include="Ueditor\umeditor.min.js" />
-    <Content Include="Upload\20160608091208.jpg" />
-    <Content Include="Upload\20160608091349.jpg" />
-    <Content Include="Upload\20160608092039.jpg" />
-    <Content Include="Upload\20160608092752.jpg" />
-    <Content Include="Upload\20160608092839.jpg" />
-    <Content Include="Upload\20160608093333.jpg" />
-    <Content Include="Upload\20160609080858.jpg" />
-    <Content Include="Upload\20160610124648.jpg" />
     <Content Include="Upload\20160611104740.jpg" />
     <Content Include="Upload\20160611105114.jpg" />
     <Content Include="Upload\20160611105247.jpg" />
