@@ -12,7 +12,15 @@ namespace ReUse.Controllers
         // GET: Want
         public ActionResult Index()
         {
-
+            return View();
+        }
+        [Authorize]
+        public ActionResult Add()
+        {
+            return View();
+        }
+        public ActionResult Add(Models.Want model)
+        {
             return View();
         }
     }
