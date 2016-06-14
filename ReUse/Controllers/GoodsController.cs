@@ -43,7 +43,7 @@ namespace ReUse.Controllers
                 //第几页
                 int pageNumber = page ?? 1;
                 //每页显示多少条
-                int pageSize = int.Parse(ConfigurationManager.AppSettings["pageSize"]);
+                int pageSize = int.Parse(ConfigurationManager.AppSettings["pageSizeUser"]);
                 //根据创建时间 降序排序
                 var art1 = art.OrderByDescending(x => x.CreatDate);
                 //通过topagelist扩展方法进行分页

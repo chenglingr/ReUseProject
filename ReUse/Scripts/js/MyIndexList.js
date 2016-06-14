@@ -48,10 +48,11 @@ $(document).ready(function () {
         $.post(url, parameter, function (data) {
           
             var msg = "";
-        
+            if (data.Data.length == 0) { msg = "暂无留言"; }
             for (var i = 0, length = data.Data.length; i < length; i++) 
             {
-                var ta = "<span class=\"label label-success\">";
+             
+                var ta = "<span class=\"label label-success liuyan\">";
                 var xy = 0;
                 if (data.Data[i].qq != "") { xy = 1; ta = ta+"QQ:" + data.Data[i].qq + "&nbsp;&nbsp;"; }
                 if (data.Data[i].email != "") { xy = 1; ta = ta + "邮箱：" + data.Data[i].email + "&nbsp;&nbsp;"; }
@@ -61,9 +62,9 @@ $(document).ready(function () {
                 ta=ta+"</span>"
                 var da = new Date(parseInt(data.Data[i].createdate.substr(6)));
                 var da1 = da.getFullYear() + "-" + da.getMonth() + "-" + da.getDate();             
-                msg += da1 + " [" + data.Data[i].name + "]发来信息:<br/>" + "<DiV class=\"alert alert-warning\">" + ta + "<br/><br/><span class=\"label label-info\">内容:" + data.Data[i].content + "</span></div>";
+                msg += da1 + " [" + data.Data[i].name + "]发来信息:<br/>" + "<DiV class=\"alert alert-warning\">" + ta + "<br/><br/><span class=\"label label-info liuyan\">内容:" + data.Data[i].content + "</span></div>";
            }
-            $('#Trans').html(msg);
+           $('#Trans').html(msg);
         });
    
     })

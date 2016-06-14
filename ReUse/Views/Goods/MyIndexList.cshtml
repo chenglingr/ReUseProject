@@ -6,9 +6,6 @@
 }
 @section HeaderSection{
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/js/date.format.js"></script>
     <script src="~/Scripts/js/MyIndexList.js"></script>
 }
 @section ContentBody{
@@ -49,6 +46,7 @@
 <div>
     每页 @Model.PageSize 条记录，共 @Model.PageCount 页，当前第 @Model.PageNumber 页
     @Html.PagedListPager(Model, page => Url.Action("MyIndexList", new { page }))
+   
 </div>
 
 <div class="modal fade" id="EditState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -81,7 +79,11 @@
                 <h4 class="modal-title" id="exabel">交易请求留言</h4>
             </div>
             <div class="modal-body">
-               <div id="Trans"></div>
+                 <div class="panel panel-default">
+                    <div class="panel-body"  id="Trans">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
