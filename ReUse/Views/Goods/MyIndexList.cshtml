@@ -25,7 +25,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>     @Html.ActionLink(item.GoodsName, "Detail", new { id = item.ID }, new { target = "_blank" })  </td>
+            <td>     @Html.ActionLink(item.GoodsName.Substring(0, (@item.GoodsName.Length >= 20) ? 20 : @item.GoodsName.Length), "Detail", new { id = item.ID }, new { target = "_blank" })  </td>
             <td>            @Html.DisplayFor(modelItem => item.CreatDate)        </td>
             <td>            @Html.DisplayFor(modelItem => item.ClickNum)        </td>
             <td>         

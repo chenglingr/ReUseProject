@@ -41,15 +41,15 @@
         {
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <div >
-                        <img src="@item.Pic" class="img-responsive showImg1 "  alt="...">                     
+                    <div class="goodspic">
+                        <img src="@item.Pic" class="img-responsive showImg1 "  alt="物品图片">                     
                     </div>
                     <div class="caption text-center">
-                        <h3>
-                            <a class="product-category-link" href="/citit-box">
-                                @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID })
-                            </a>
-                        </h3>
+                        <p class="product-category-link">
+                           <strong>
+                             @Html.ActionLink(@item.GoodsName.Substring(0, (@item.GoodsName.Length >= 15) ? 15 : @item.GoodsName.Length), "Detail", new { id = item.ID })
+                            </strong>    
+                        </p>
                         <p><span class="label label-success">@item.News </span>&nbsp;&nbsp;<span class="label label-info">点击量：<span class="badge">@item.ClickNum </span></span> </p><p><span class="label label-warning">发布时间：@item.CreatDate</span></p>
                       <div class="text-center">
                             @Html.ActionLink("查看详情", "Detail", new { id = item.ID },new { @class= "btn btn-default" })
@@ -82,15 +82,15 @@
         {
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <div >
+                    <div class="goodspic">
                         <img src="@item.Pic" class="img-responsive showImg1" alt="...">
                     </div>
                     <div class="caption text-center">
-                        <h3>
-                            <a class="product-category-link" href="/citit-box">
-                                @Html.ActionLink(@item.GoodsName, "Detail", new { id = item.ID })
-                            </a>
-                        </h3>
+                        <p class="product-category-link">
+                            <strong>
+                                @Html.ActionLink(@item.GoodsName.Substring(0, (@item.GoodsName.Length >= 15) ? 15 : @item.GoodsName.Length), "Detail", new { id = item.ID })
+                            </strong>
+                        </p>
                         <p><span class="label label-success">@item.News </span>&nbsp;&nbsp;<span class="label label-info">点击量：<span class="badge">@item.ClickNum </span></span> </p><p><span class="label label-warning">发布时间：@item.CreatDate</span></p>
                         <div class="text-center">
                             @Html.ActionLink("查看详情", "Detail", new { id = item.ID }, new { @class = "btn btn-default" })

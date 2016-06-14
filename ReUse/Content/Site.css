@@ -82,9 +82,10 @@ textarea {
   text-align: left;
   color: #249136;
 }
-.product-category-link {
+.product-category-link a{
   color: #838383;
-  font-size: 14px;
+  font-size: 15px;
+
 }
 
 /*index end*/
@@ -94,7 +95,8 @@ textarea {
 .myinput {
     max-width: 580px;
 }
-
+/*图片居中*/
+.goodspic img{ margin:0 auto;}
 .showImg {
     width: 200px;
     height: 200px;
