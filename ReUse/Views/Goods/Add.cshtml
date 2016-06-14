@@ -19,6 +19,8 @@
 
 @section ContentBody{
 <h2>Add</h2>
+
+<hr />
 @Html.ValidationMessage("Error", new { style = "color:red;" })
 <div class="form-group">
     <div class="col-md-1"></div>
@@ -41,12 +43,12 @@
     @Html.Hidden("Pic")
     <div class="form-horizontal">
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
         <div class="form-group">
-            @Html.LabelFor(model => model.GoodsName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("物品名称 *", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.GoodsName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GoodsName, "", new { @class = "text-danger" })
+              
             </div>
         </div>
 
@@ -56,7 +58,7 @@
             @Html.LabelFor(model => model.Style1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Style1", ViewData["EnumStyle1"] as SelectList, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Style1, "", new { @class = "text-danger" })
+              
             </div>
         </div>
 
@@ -66,7 +68,6 @@
              
                 @Html.TextArea("Description")
 
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -74,7 +75,7 @@
             @Html.LabelFor(model => model.News, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("News", ViewData["EnumNews"] as SelectList, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.News, "", new { @class = "text-danger" })
+              
             </div>
         </div>
 
@@ -83,7 +84,7 @@
             <div class="col-md-10">
                
                 @Html.DropDownList("ChangeType", ViewData["EnumChangeType"] as SelectList, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ChangeType, "", new { @class = "text-danger" })
+                <span id="helpBlock" class="help-block">现金交易（单位：元）与积分交换（单位：分），请填写交易价格；实物交换，填写所需物品</span>
             </div>
         </div>
 
@@ -91,7 +92,7 @@
             @Html.LabelFor(model => model.ChangPrice, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="number" min="-1" name="ChangPrice" id="ChangPrice" value="0" class = "form-control"/>
-               @Html.ValidationMessageFor(model => model.ChangPrice, "", new { @class = "text-danger" })
+               
             </div>
         </div>
 
@@ -100,7 +101,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ChangeGoods, new { htmlAttributes = new { @class = "form-control" } })
 
-                @Html.ValidationMessageFor(model => model.ChangeGoods, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -108,7 +108,7 @@
             @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Area", ViewData["EnumArea"] as SelectList, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+               
             </div>
         </div>
 
@@ -116,7 +116,7 @@
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+              
             </div>
         </div>
 

@@ -14,7 +14,7 @@ namespace ReUse.Models
         [Required(ErrorMessage = "请输入评论内容")]
         public string Content { get; set; }
         [DisplayName("评论时间")]
-        public string CeateDate { get; set; }
+        public DateTime CeateDate { get; set; }
         public int? UserID { get; set; }
         public int? GoodsID { get; set; }
         public virtual User User { get; set; }

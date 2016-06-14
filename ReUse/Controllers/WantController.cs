@@ -22,8 +22,32 @@ namespace ReUse.Controllers
         [HttpPost]
         public ActionResult Add(Models.Want model)
         {
+            model.ClickNum = 0;
+            model.CreatDate = DateTime.Now;
+            model.State = 0;
+            if (Session["UserID"] == null)
+            {
+                model.UserID = 1;
+            }
+            else
+            {
+                model.UserID = int.Parse(Session["UserID"].ToString());//获取作者id
 
-            return View();
+            }
+            if (ModelState.IsValid)
+            {
+                db.Wants.Add(model);//增加
+                db.SaveChanges();//保y
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("Error", "添加失败，请重填");//
+                return View();
+            }
+          
         }
+            
+        
     }
 }
