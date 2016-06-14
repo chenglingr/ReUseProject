@@ -328,6 +328,7 @@
     <Content Include="Views\Shared\StyleList.cshtml" />
     <Content Include="Views\Goods\MyIndexList.cshtml" />
     <Content Include="Views\Shared\ShowTrans.cshtml" />
+    <Content Include="Views\Want\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,7 +336,6 @@
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Tran\" />
-    <Folder Include="Views\Want\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

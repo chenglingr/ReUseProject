@@ -14,5 +14,16 @@ namespace ReUse.Controllers
         {
             return View();
         }
+       // [Authorize]
+        public ActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Add(Models.Want model)
+        {
+
+            return View();
+        }
     }
 }

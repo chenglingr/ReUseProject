@@ -5,15 +5,29 @@ using System.Web.UI.WebControls;
 public enum Style1
 {
     图书,
+    手机,
+    数码,
+    电脑,
+    食品,
+    服饰,
+    鞋靴,
+    玩具,
     电器,
-    家具
+    家具,
+    化妆品,
+    母婴用品,
+    其他类别
 }
 public enum News
 {
     全新,
     九成新,
     八成新,
-    七成新
+    七成新,
+    六成新,
+    五成新,
+    四成新,
+    三成新
 }
 public enum ChangeType
 {
@@ -24,8 +38,12 @@ public enum ChangeType
 public enum Area
 {
     东区,
+    西区,
+    南区,
     石岐区,
-    火炬区
+    火炬区,
+    五桂山,
+    其他地区
 }
 
 
