@@ -20,6 +20,7 @@ namespace ReUse.Controllers
             return View();
         }
         [HttpPost]
+        [Filter.AntiSqlInject]
         public ActionResult Add(Models.Want model)
         {
             model.ClickNum = 0;
