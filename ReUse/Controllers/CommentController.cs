@@ -12,7 +12,7 @@ namespace ReUse.Controllers
         // GET: Comment
         public ActionResult Index()
         {
-            return View();
+             return View();
         }
     }
 }
