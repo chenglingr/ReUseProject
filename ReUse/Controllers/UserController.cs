@@ -31,6 +31,7 @@ namespace ReUse.Controllers
         }
 
         [HttpPost]
+        [Filter.AntiSqlInject]
         public ActionResult Edit(Models.User acc)
         {
             //加上 using System.Data.Entity;
@@ -44,6 +45,7 @@ namespace ReUse.Controllers
             return View();
         }
         [HttpPost]
+       // [Filter.AntiSqlInject]
         public ActionResult Login(string UserName, string UserPwd)
         {
             var acc = db.Users.Where(b => b.UserName == UserName & b.UserPwd == UserPwd);
@@ -73,6 +75,7 @@ namespace ReUse.Controllers
             return View();
         }
         [HttpPost]
+        [Filter.AntiSqlInject]
         public ActionResult Register(Models.User acc)
         {
             string name = acc.UserName;

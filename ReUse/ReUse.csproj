@@ -146,6 +146,8 @@
     <Compile Include="Controllers\WantController.cs" />
     <Compile Include="DAL\AccountContext.cs" />
     <Compile Include="DAL\AccountInitializer.cs" />
+    <Compile Include="Filter\AntiSqlInjectAttribute.cs" />
+    <Compile Include="Filter\StringHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -332,7 +334,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filter\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Tran\" />
