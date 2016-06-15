@@ -97,7 +97,6 @@ namespace ReUse.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [Authorize]
-        [Filter.AntiSqlInject]
         public ActionResult Add(Models.Goods model)
         {
             model.CreatDate = DateTime.Now;

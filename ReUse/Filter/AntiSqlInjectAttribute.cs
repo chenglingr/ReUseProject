@@ -12,7 +12,7 @@ namespace ReUse.Filter
         {
 
         }
-        //给action前面加上 [AntiSqlInject]
+        //给action前面加上 [AntiSqlInject] 防sql注入
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var actionParameters = filterContext.ActionDescriptor.GetParameters();

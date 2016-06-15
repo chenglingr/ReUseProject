@@ -31,7 +31,6 @@ namespace ReUse.Controllers
             return Json(json);
         }
         [HttpPost]
-        [Filter.AntiSqlInject]
         public ActionResult Add(int? Goodsid ,string content)
         {
             Models.Tran model = new Models.Tran();
