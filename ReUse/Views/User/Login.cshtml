@@ -10,6 +10,7 @@
     <hr />
     <div class="width50">
         <form action="/User/Login" method="post" class="form-horizontal">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label for="UserName" class="col-sm-2 control-label">用户名</label>
                 <div class="col-sm-10">

@@ -20,6 +20,8 @@ namespace ReUse.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken()]
+        [Filter.IsPostFromThisSite] //验证是否本机提交
         public ActionResult Add(Models.Want model)
         {
             model.ClickNum = 0;

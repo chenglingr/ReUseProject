@@ -44,7 +44,9 @@ namespace ReUse.Controllers
             return View();
         }
         [HttpPost]
-       // [Filter.AntiSqlInject]
+        [ValidateAntiForgeryToken()]
+        [Filter.IsPostFromThisSite] //验证是否本机提交
+        // [Filter.AntiSqlInject]
         public ActionResult Login(string UserName, string UserPwd)
         {
             var acc = db.Users.Where(b => b.UserName == UserName & b.UserPwd == UserPwd);
@@ -74,6 +76,8 @@ namespace ReUse.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken()]
+        [Filter.IsPostFromThisSite] //验证是否本机提交
         public ActionResult Register(Models.User acc)
         {
             string name = acc.UserName;

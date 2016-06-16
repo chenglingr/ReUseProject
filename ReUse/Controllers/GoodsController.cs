@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Microsoft.Security.Application;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -97,12 +98,15 @@ namespace ReUse.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [Authorize]
+        [ValidateAntiForgeryToken()]
+        [Filter.IsPostFromThisSite] //验证是否本机提交
         public ActionResult Add(Models.Goods model)
         {
             model.CreatDate = DateTime.Now;
             model.ClickNum = 0;
             model.State =0;
-
+            model.Description=Sanitizer.GetSafeHtmlFragment(model.Description);
+            //安装 AntiXSS 插件 去掉危险标签
             if (Session["UserID"] == null)
             {
                 FormsAuthentication.SignOut();//清除假登陆状态
